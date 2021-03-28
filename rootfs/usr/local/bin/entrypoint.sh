@@ -1,5 +1,5 @@
 #!/bin/sh
 
-pg_ctl start
-redis-server -D
+service postgresql start
+service redis-server start
 /usr/sbin/sshd -D

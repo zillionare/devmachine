@@ -11,10 +11,11 @@ RUN apt-get update \
         && mkdir /var/run/sshd \
         && (echo 'root:root' | chpasswd) \
         && mkdir /root/.sshd \
-        && pip3 config set global.index-url http://mirrors.aliyun.com/pypi/simple/ \
+        && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
         && wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
         && bash /tmp/miniconda.sh -b -p /conda \
         && /conda/bin/conda init \
+	&& (echo "PermitRootLogin yes" >> /etc/ssh/sshd_config) \
         && (echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/12/pg_hba.conf) \
         && (echo "listen_address='*'" >> /etc/postgresql/12/pg_hba.conf) \
         && apt-get clean \
