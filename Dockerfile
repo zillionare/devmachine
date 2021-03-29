@@ -10,7 +10,7 @@ RUN apt-get update \
         && apt-get install -qq --no-install-recommends -y python3.8 python3-pip build-essential python3.8-dev vim iputils-ping\
         && mkdir /var/run/sshd \
         && (echo 'root:root' | chpasswd) \
-        && mkdir /root/.sshd \
+	&& chmod 700 /root/.ssh \
         && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
         && wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
         && bash /tmp/miniconda.sh -b -p /conda \
