@@ -1,6 +1,7 @@
 FROM ubuntu:focal
 MAINTAINER Aaron_Yang
 
+ENV PYPI_INDEX_URL=https://pypi.org/simple
 ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /
 COPY rootfs ./
@@ -11,7 +12,7 @@ RUN apt-get update \
         && mkdir /var/run/sshd \
         && (echo 'root:root' | chpasswd) \
 	&& chmod 700 /root/.ssh \
-        && pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+        && pip3 config set global.index-url $PYPI_INDEX_URL \
         && wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
         && bash /tmp/miniconda.sh -b -p /conda \
         && /conda/bin/conda init \
