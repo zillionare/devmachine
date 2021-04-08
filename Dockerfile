@@ -12,7 +12,6 @@ RUN apt-get update \
         && mkdir /var/run/sshd \
         && (echo 'root:root' | chpasswd) \
 	&& chmod 700 /root/.ssh \
-        && pip3 config set global.index-url $PYPI_INDEX_URL \
         && wget --no-check-certificate https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh \
         && bash /tmp/miniconda.sh -b -p /conda \
         && /conda/bin/conda init \
@@ -25,6 +24,7 @@ RUN apt-get update \
 expose 22
 expose 5432
 expose 6379
+expose 3180-3184 
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD "bin/bash"
