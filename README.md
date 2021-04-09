@@ -30,12 +30,14 @@ To get started, you'll need get the image first. There're two ways to do so:
 
 3. now you have a image at local now, then create the container by:
     ```
-    sudo docker run -d -P -p 31822:22 --name container_name image_name
+    sudo docker run -d -P -p 31822:22 --name container_name --restart unless-stopped image_name
     ```
 
     '-P' here is used to mapping redis/postgres port, and 5 reserved ports 3180~3184 to host. You can run your service on these reserved ports.
 
-    port 31822 here is for ssh connection, you can use port rather than 31822 for ssh connection
+    port 31822 here is for ssh connection, you can use port rather than 31822 for ssh connection.
+
+    "--restart unless-stopped" tells docker enginer restart this container after system boot, or other case, if not stopped by user.
 
 4. running the container
     after step 3, the container is up and run. For later usage, since this is dev machine and should run for a long period, you should start the container by:
